@@ -7,7 +7,7 @@ $name = "";
 $errors = array();
 
 //if user signup button
-if (isset ($_POST['signup'])) {
+if (isset($_POST['signup'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
@@ -34,7 +34,7 @@ if (isset ($_POST['signup'])) {
 
 }
 //if user click login button
-if (isset ($_POST['login'])) {
+if (isset($_POST['login'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $check_email = "SELECT * FROM users WHERE email = '$email'";
@@ -58,7 +58,7 @@ if (isset ($_POST['login'])) {
 }
 
 //if user click continue button in forgot password form
-if (isset ($_POST['check-email'])) {
+if (isset($_POST['check-email'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $check_email = "SELECT * FROM users WHERE email='$email'";
     $run_sql = mysqli_query($conn, $check_email);
@@ -74,7 +74,7 @@ if (isset ($_POST['check-email'])) {
 }
 
 //if user click change password button
-if (isset ($_POST['change-password'])) {
+if (isset($_POST['change-password'])) {
     $_SESSION['info'] = "";
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
@@ -87,10 +87,10 @@ if (isset ($_POST['change-password'])) {
         $run_query = mysqli_query($conn, $update_pass);
 
         if ($run_query) {
-            $info = "Your password changed. Now you can login with your new password.";
-            $_SESSION['info'] = $info;
-
+            $_SESSION['info'] = "Your password changed. Now you can login with your new password.";
+            // Redirect to password changed page
             header('Location: password-changed.php');
+            exit();
         } else {
             $errors['db-error'] = "Failed to change your password!";
         }
@@ -98,7 +98,8 @@ if (isset ($_POST['change-password'])) {
 }
 
 //if login now button click
-if (isset ($_POST['login-now'])) {
+if (isset($_POST['login-now'])) {
     header('Location: login.php');
+    exit();
 }
 ?>

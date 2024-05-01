@@ -407,7 +407,6 @@ include "../config/db.php";
                                                     </li>
                                                 </ul>
                                             </nav>
-
                                         </div>
                                     </div>
                                 </div>
